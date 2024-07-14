@@ -34,6 +34,8 @@ Next we define how fast the game should run by calling the SetTargetFPS function
 
 ## **Step 2: Creating the Spaceship**
 
-
+We have separately created a Spaceship class using a header file and an implementation file.
+<br>The header file ((usually with a .h extension) contains the class declaration, including the class name, member variables, and function prototypes. It serves as an interface for other parts of the program to use the class.
+<br>The implementation file (usually with a .cpp extension) contains the actual implementation of the class functions. This is where the member functions defined in the header file are implemented. 
 
 
