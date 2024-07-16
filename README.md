@@ -4,14 +4,14 @@
 
 In this project we have created a simple Space Shooting game using C++ language and raylib library. raylib is a simple and easy-to-use library to enjoy videogames programming and it's especially well suited for prototyping, tooling, graphical applications, embedded systems and education.
 
-**The goal is to protect the spaceship from being destroyed by the alien invaders while shooting them down to earn points. As the game progresses, the aliens descend closer, increasing the challenge. From time to time a mystery ship appears, and the player can hit it to earn more points! The player has 3 lives.**
+**The goal is to protect the spaceship from being destroyed by the alien invaders while shooting them down to earn points. As the game progresses, the aliens descend closer, increasing the challenge. From time to time a mystery ship appears, and the player can hit it to earn more points! The player has only 3 lives.**
 
 Every game structure consists of 2 parts : DEFINITIONS and GAME LOOP.
 
-**DEFINITIONS** is the part where we define our variables and game objects such as the spaceship, aliens, lasers, shields and the gaming arena. 
+**DEFINITIONS** is the part where we define our variables and game objects such as the spaceship, aliens, lasers, obstacles and the gaming arena. 
 <br>The **GAME LOOP** is responsible for event handling, updating the positions of game objects and checking for collisions. The updates happen so fast that it appears like a continuous movement. The GAME LOOP is run repeatedly until the game is closed. 
 
-We will make this game by breaking it down into smaller parts.
+We made this game by breaking it down into smaller parts.
 
 ## **Step 1: Creating Blank Canvas and Game Loop**
 
@@ -22,7 +22,7 @@ Everytime we create a window, at some point we have to destroy it, and we do so 
 
 **GAME LOOP**
 <br>The game loop consists of 3 parts. 
-<br>**Event handling:** First, we need to check for any events that occur in the game, such as
+<br>**Event handling:** First, we check for any events that occur in the game, such as
 quitting the game, a key pressed on the keyboard, etc. 
 <br>**Updating positions:** Next, we update the positions of all game objects, such as the spaceship, aliens, lasers, etc. 
 <br>**Drawing objects:** Finally, we draw all the game objects in their new positions on the screen. 
@@ -34,8 +34,68 @@ Next we define how fast the game should run by calling the SetTargetFPS function
 
 ## **Step 2: Creating the Spaceship**
 
-We have separately created a Spaceship class using a header file and an implementation file.
-<br>The header file ((usually with a .h extension) contains the class declaration, including the class name, member variables, and function prototypes. It serves as an interface for other parts of the program to use the class.
+We separately create a Spaceship class using a header file and an implementation file. This will help in better organisation and abstraction of the code.
+<br>The header file (usually with a .h extension) contains the class declaration, including the class name, member variables, and function prototypes. It serves as an interface for other parts of the program to use the class.
 <br>The implementation file (usually with a .cpp extension) contains the actual implementation of the class functions. This is where the member functions defined in the header file are implemented. 
+
+The basic methods in our Sapceship class are Draw(), MoveLeft(), MoveRight(), FireLaser().
+
+We use a Vector2 variable to hold the position of the Sapceship object. Vector2 is a data structure that contains x and y attribute.
+
+To load an image for the spaceship object, we need to use the LoadImage() function. This function takes a string argument that represents the path to the image file. The loaded image is used to create a texture using the LoadTextureFromImage() function.
+The spaceship appears on the screen when the Draw() method is called.
+<br>A destructor is also created to unload the texture when the object is destroyed.
+
+Initially the spaceship object is placed at the bottom centre of the gaming window.
+
+
+## **Step 3: Creating the Game Class**
+
+To improve code organization and make it easier to manage in the future, we create a Game class separately to hold the spaceship, alien, obstacle objects, as well as various methods. The Game class serves as a container for all the elements of our game such as the spaceship, aliens, game state. It holds methods that manage the game's logic such as updating the position of the game objects, checking for collisions, updating the score, handling input etc. 
+
+
+## **Step 4: Moving the Spaceship**
+
+To move the spaceship we change its position in the x axis by 7 pixels in the MoveLeft () and MoveRight () functions. This movement is limited within the gaming arena. The player can move the spaceship to the right by pressing "->" key and to move to the left, "<-" key must be pressed.
+
+We add keyboard controls to the game class to control its movement.
+
+![image](https://github.com/user-attachments/assets/30eb1d73-652f-4625-b103-b61292a6b328)
+
+
+## **Step 5: Creating the Lasers**
+
+Both the spaceship and the aliens have the ability to shoot lasers. The aliens shoot green lasers and the spaceship shoots blue lasers. When the player presses spacebar key, the spaceship will shoot lasers.
+
+We separately create a Laser class. The lasers are represented as a rectangle. So we draw them using the DrawRectangle() function of raylib library in the Draw() method.
+<br>The laser objects are initialized in the constructor with a position and speed.
+The Update() method is responsible for the movement of the laser objects. The y position are only altered within the gaming arena.
+If we want to move the laser up, we provide a negative value to the speed argument. If we want to move the laser down, we provide a positive one. 
+<br>To destroy every laser object that moves out of the game window, we add a state to the laser objects, i.e. they can be either active or inactive. If it is inactive, it is destroyed using the DeleteInactiveLasers() method in the Game class. The inactive lasers are erased.
+
+
+## **Step 6: Adding the Laser shooting Ability to the Spaceship**
+
+We create a vector which will contain all the lasers that the spaceship shoots. FireLaser() method is called when the player presses the spacebar key on the keyboard. On calling this method, a laser object will be created and added to the vector of lasers. 
+
+This method contains the position of the laser object and speed as it's arguments. The speed will be negative for the spaceship. The position of the lasers will be the center of the spaceship. 
+
+We use a range based for loop to call the Draw() and Update() methods for every laser object.
+
+Next, we add delay so that the player cannot shoot a laser before a certain amount of time has passed. In the Spaceship class, we use a timer to keep track of when the last laser is fired using GetTime() function and storing the time in a variable, i.e. lastFiredTime.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
