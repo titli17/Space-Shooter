@@ -85,8 +85,31 @@ We use a range based for loop to call the Draw() and Update() methods for every 
 Next, we add delay so that the player cannot shoot a laser before a certain amount of time has passed. In the Spaceship class, we use a timer to keep track of when the last laser is fired using GetTime() function and storing the time in a variable, i.e. lastFiredTime.
 
 
+## **Step 7: Creating the Obstacles**
+
+The obstacles are for the aliens. They act as shields for the spaceship. There are four protective barriers under which the player's spaceship can hide to avoid alien lasers.
+They display damge when hit by the alien's lasers.
+
+We create a Block class separately. Each object is initialised with it's position in the constructor using Vector2 variable. The Draw() method draws the blue block using DrawRectangle() function.
+
+Then we separately create an Obstacle class. The obstacle is representated as collection of blue blocks carefully arranged to give a desired shape. It is anvisible grid consisting of 13 rows and 23 columns, totaling 299 cells. This grid is a vector of vectors. Each cell can be either empty or it can contain a blue block of 3x3 pixels. To make a cell blue, we set its value to 1. If we want an empty cell, we assign it a value of 0.
+
+![image](https://github.com/user-attachments/assets/ccb62d17-9fe0-45fa-8f08-b8edd6a6d4a0)
+
+We create a blocks vector which will contain all the blocks created.
+
+We iterate through all the cells in the grid and create a new block only when we find the value 1 in a cell. After creating the blue blocks, we add them to the blocks vector. The Draw() method draws all the blocks inside the blocks vector.
+
+Now, when a laser hits a cell, we only change it's cell value to 0 to simulate damage.
+
+In the Game class, we create a obstacles vector to hold the 4 obstacle objects. The 4 obstacle objects are created using CreateObstacles() method. This method returns the vector of obstacles.
+
+![image](https://github.com/user-attachments/assets/7f884950-53b0-4a10-9ecf-f5ad7f6f5b33)
+
+Finally to draw these 4 obstacles, we use a range based for loop in the Draw() method of the Game class.
 
 
+## **Step 8: Creating the Aliens**
 
 
 
