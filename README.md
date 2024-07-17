@@ -111,11 +111,30 @@ Finally to draw these 4 obstacles, we use a range based for loop in the Draw() m
 
 ## **Step 8: Creating the Aliens**
 
+Our game has 5 rows and 11 columns of aliens. All of the aliens move collectively either to the left or the right, occasionally firing lasers. When they reach the edge of the game window, they change their movement direction and shift slightly downward, progressively increasing the game's challenge.
+
+We create an Alien class separately. There are 3 different types pf aliens. So each alien has a type that is used to display a different image for each type. Every alien is given a type and position initialised using the constructor. We load the image of the alien depending on the type. 
+
+![image](https://github.com/user-attachments/assets/5ddec423-5c1e-4b11-a01e-bf106c579f0e)
+
+Here, we create a static attribute named alienImages which is an array of 3 elements. It is initialized only once and contains all 3 alien images. So, the first time an Alien object is created, it loads the images in this attribute, and then each new alien object uses these images at once. It won’t load them again. This saves time.
+
+We will use the DrawTextureV() function in the Draw() method to draw the image on the specified position on the screen. 
+
+Next, we create a vector named aliens in the game class that hold all the aliens and CreateAliens() method to create all the aliens returning a vector with all the aliens.
+
+![image](https://github.com/user-attachments/assets/84835449-b52c-4af5-a523-27cebea2f137)
+
+Next we unload the images when the game window is closed using the UnloadImages() method in the Alien class. We call this method in the Destructor of the Game class.
+
+To move the aliens, we add or remove some pixels from the current position. In the Game class, we create the MoveALiens() and MoveDownAliens() methods. 
+<br>We invoke the Update() method of the alien class and provide it with a direction parameter to move the aliens sideways. The x coordinate is changed.
+<br>To move the aliens down, we add some pixels to the y coordinate of the aliens' position. The MoveDownAliens() method is called whenever the aliens hit the end of the screen.
+ 
+![image](https://github.com/user-attachments/assets/cb792f81-ffbd-4fe6-8164-bd6eb515682d)
 
 
-
-
-
+## **Step 9: Adding the Laser shooting Ability to the Aliens**
 
 
 
