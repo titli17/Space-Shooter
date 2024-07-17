@@ -131,8 +131,6 @@ To move the aliens, we add or remove some pixels from the current position. In t
 <br>We invoke the Update() method of the alien class and provide it with a direction parameter to move the aliens sideways. The x coordinate is changed.
 <br>To move the aliens down, we add some pixels to the y coordinate of the aliens' position. The MoveDownAliens() method is called whenever the aliens hit the end of the screen.
  
-![image](https://github.com/user-attachments/assets/cb792f81-ffbd-4fe6-8164-bd6eb515682d)
-
 
 ## **Step 9: Adding the Laser shooting Ability to the Aliens**
 
