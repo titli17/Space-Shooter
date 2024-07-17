@@ -134,7 +134,56 @@ To move the aliens, we add or remove some pixels from the current position. In t
 
 ## **Step 9: Adding the Laser shooting Ability to the Aliens**
 
+We create a vector to hold all the alien lasers in the Game class. The AlienShootLaser() method selects a random alien and shoots a laser from it. The GetRandomValue() function is used with range 0 to 2 to get a random alien type. Then, we create a laser for that alien and store it in the vector. A positive integer is passes as speed for the laser as it will move downwards.
+<br>Finally we call the Update() and the Draw() method for the alien lasers in the Game class.
 
+To make the aliens shoot lasers at a slower rate, we use a timer to keep track of when the last laser is fired using GetTime() function and store the time in a variable, i.e. timeLastAlienFired. If the time interval between current time and last fired time exceeds a certain value, a new laser will be fired by the alien. 
+<br>The inactive alien lasers are deleted just like the spaceship lasers.
+
+
+## **Step 10: Creating the Mystery Cat Ship**
+
+The mystery cat ship is another alien ship that appears at the top of the screen from time to time and moves horizontally, either to the left or to the right. Unlike the regular alien ships, this unique alien ship doesn't shoot lasers. However, players have the opportunity to earn extra points by hitting it. 
+
+We create a Cat class separately. A single object of this class is created and displayed from time to time. Multiple objects are not created. This is implemented using the Spawn() method. In the constructor, we load the image of the cat and set the alive attribute to false. Using the Draw() method we draw the image when the alive attribute is true. To spawn the ship at random intervals of time, we call the Spawn() method in the Game classes's Update() method using the GetTime() and GenerateRandomValue() functions.
+<br>The ship spawns from either side of the screen. So the random starting point is generated using GetRandomValue() function with range 0 to 1. ) represents the left side and 1 represents the right side. 
+
+![image](https://github.com/user-attachments/assets/b93c79c5-f930-4c6e-95b0-486996435f89)
+
+To move the ship, we use the Update() method. the x coordinate of it's position is added with the speed.
+
+
+## **Step 11: Checking for Collisions**
+
+Raylib provides the CheckCollisionRecs() function, which determines if two rectangles collide.
+Since all our game elements are not rectangle, getRect() method is used which returns a rectangle object. This rectangle is matched to the dimensions of the object's image and positioned accordingly. The x and y position of the object along with the image width and height are passed as arguments to the getRect() method.
+
+The collision checking is done in the Game class.
+<br>First, we check every laser beam the spaceship shoots. If it collides with any of the 3 aliens, we erase that alien. If 5 lasers hit the cat ship, the alive attribute of the cat is set to false. After the lasers collide, their active attribute is set to false.
+
+Next, we check every laser beam the aliens shoot. If it collides with the spaceship for 3 times, then GameOver! If it collides with the blocks of the obstacles, the blocks are erased. After the lasers collide, their active attribute is set to false.
+
+Finally, we check if the aliens collide with the obstacles or the spaceship or the bottom line of the gaming area. If the aliens collide with the blocks of the obstacles, the respective blocks are erased. If the aliens collide with the spaceship or the bottom line of the gaming arena, then GameOver!
+
+
+## **Step 12: Game Over**
+
+This method is called when 3 lives of the spaceship are over or the aliens collide with the spaceship or the bottom line of the gaming arena. We add a new attribute named run. This attribute has value True if the game is running and False if the game is over. So in the GmaeOver() method the run attribute is set to false.
+
+
+## **Step 13: Reset and Initialise the Game again**
+
+All the aliens, the alien lasers and the obstacles are cleared in the Reset() method.
+A Reset() method is added in the Spaceship class where the spaceship object is set to its original position and all it's lasers are cleared. This method is called in the Reset() method of the Game class.
+
+We create InitGame() method to initialise all the variables of the game elements to their initial values. So in the constructor of the Game class we only call the InitGame() method.
+
+![image](https://github.com/user-attachments/assets/894a52cc-1b2b-430d-9858-37bc436efdad)
+
+These 2 methods of the Game class are called when the player presses the ENTER key of the keybard. 
+
+
+## **Step 14: Adding Score**
 
 
 
