@@ -2,7 +2,7 @@
 
 ## **Introduction:**
 
-In this project we have created a simple Space Shooting game using C++ language and raylib library. raylib is a simple and easy-to-use library to enjoy videogames programming and it's especially well suited for prototyping, tooling, graphical applications, embedded systems and education.
+In this project we have created a simple Space Shooting game using C++ language and raylib library. Raylib is a simple and easy-to-use library to enjoy videogames programming and it's especially well suited for prototyping, tooling, graphical applications, embedded systems and education.
 
 **The goal is to protect the spaceship from being destroyed by the alien invaders while shooting them down to earn points. As the game progresses, the aliens descend closer, increasing the challenge. From time to time a mystery ship appears, and the player can hit it to earn more points! The player has only 3 lives.**
 
@@ -11,17 +11,17 @@ Every game structure consists of 2 parts : DEFINITIONS and GAME LOOP.
 **DEFINITIONS** is the part where we define our variables and game objects such as the spaceship, aliens, lasers, obstacles and the gaming arena. 
 <br>The **GAME LOOP** is responsible for event handling, updating the positions of game objects and checking for collisions. The updates happen so fast that it appears like a continuous movement. The GAME LOOP is run repeatedly until the game is closed. 
 
-We made this game by breaking it down into smaller parts.
+We make this game by breaking it down into smaller parts.
 
 ## **Step 1: Creating Blank Canvas and Game Loop**
 
 The game window is like a blank canvas where we can draw our game objects.
-<br>We need to specify the width and the height of the game window. To create the game window we have to call the InitWindow() function. This function initialises a window.
+<br>We need to specify the width and the height of the game window. To create the game window we call the InitWindow() function. This function initialises a window.
 
 Everytime we create a window, at some point we have to destroy it, and we do so with the CloseWindow() function before the return statement. It checks if the Escape key on the keyboard is pressed or if the close icon of the window is pressed, and returns true if that is the case. So, if it returns true, the game loop ends, and the window is destroyed.
 
 **GAME LOOP**
-<br>The game loop consists of 3 parts. 
+<br>The game loop consists of 3 parts:
 <br>**Event handling:** First, we check for any events that occur in the game, such as
 quitting the game, a key pressed on the keyboard, etc. 
 <br>**Updating positions:** Next, we update the positions of all game objects, such as the spaceship, aliens, lasers, etc. 
@@ -29,24 +29,24 @@ quitting the game, a key pressed on the keyboard, etc.
 
 In the GAME LOOP, we need BeginDrawing function which creates a blank canvas so we can draw our game objects on and the EndDrawing() function which ends the canvas drawing.
 
-Next we define how fast the game should run by calling the SetTargetFPS function before the game loop. The SetTargetFPS() function takes an integer as an argument and that integer is the number of frames per second that we want. If we don’t define a frame rate for our game, the computer will try to run the game as fast as it can. So the game speed will depend on the speed of the computer. By defining a frame rate we make sure that the game runs at the same speed on every computer.
+Next we define how fast the game should run by calling the SetTargetFPS() function before the game loop. This function takes an integer as an argument and that integer is the number of frames per second that we want. If we don’t define a frame rate for our game, the computer will try to run the game as fast as it can. So the game speed will depend on the speed of the computer. By defining a frame rate we make sure that the game runs at the same speed on every computer.
 
 
 ## **Step 2: Creating the Spaceship**
 
-We separately create a Spaceship class using a header file and an implementation file. This will help in better organisation and abstraction of the code.
+We separately create a Spaceship class using a header file and an implementation file. This helps in better organisation and abstraction of the code.
 <br>The header file (usually with a .h extension) contains the class declaration, including the class name, member variables, and function prototypes. It serves as an interface for other parts of the program to use the class.
 <br>The implementation file (usually with a .cpp extension) contains the actual implementation of the class functions. This is where the member functions defined in the header file are implemented. 
 
-The basic methods in our Sapceship class are Draw(), MoveLeft(), MoveRight(), FireLaser().
+The basic methods in our Spaceship class are Draw(), MoveLeft(), MoveRight(), FireLaser().
 
-We use a Vector2 variable to hold the position of the Sapceship object. Vector2 is a data structure that contains x and y attribute.
+We use a Vector2 variable to hold the position of the Spaceship object. Vector2 is a data structure that contains x and y attribute.
 
-To load an image for the spaceship object, we need to use the LoadImage() function. This function takes a string argument that represents the path to the image file. The loaded image is used to create a texture using the LoadTextureFromImage() function.
+To load an image for the Spaceship object, we need to use the LoadImage() function. This function takes a string argument that represents the path to the image file. The loaded image is used to create a texture using the LoadTextureFromImage() function.
 The spaceship appears on the screen when the Draw() method is called.
 <br>A destructor is also created to unload the texture when the object is destroyed.
 
-Initially the spaceship object is placed at the bottom centre of the gaming window.
+Initially the Spaceship object is placed at the bottom centre of the gaming area.
 
 
 ## **Step 3: Creating the Game Class**
@@ -56,7 +56,7 @@ To improve code organization and make it easier to manage in the future, we crea
 
 ## **Step 4: Moving the Spaceship**
 
-To move the spaceship we change its position in the x axis by 7 pixels in the MoveLeft () and MoveRight () functions. This movement is limited within the gaming arena. The player can move the spaceship to the right by pressing "->" key and to move to the left, "<-" key must be pressed.
+To move the spaceship we change its position in the x axis by 7 pixels in the MoveLeft() and MoveRight() functions. This movement is limited within the gaming arena. The player can move the spaceship to the right by pressing "->" key and to move to the left, "<-" key must be pressed.
 
 We add keyboard controls to the game class to control its movement.
 
@@ -65,16 +65,16 @@ We add keyboard controls to the game class to control its movement.
 
 ## **Step 5: Creating the Lasers**
 
-Both the spaceship and the aliens have the ability to shoot lasers. The aliens shoot green lasers and the spaceship shoots blue lasers. When the player presses spacebar key, the spaceship will shoot lasers.
+Both the spaceship and the aliens have the ability to shoot lasers. The aliens shoot green lasers and the spaceship shoots blue lasers. When the player presses the spacebar key, the spaceship shoots lasers.
 
 We separately create a Laser class. The lasers are represented as a rectangle. So we draw them using the DrawRectangle() function of raylib library in the Draw() method.
 <br>The laser objects are initialized in the constructor with a position and speed.
-The Update() method is responsible for the movement of the laser objects. The y position are only altered within the gaming arena.
-If we want to move the laser up, we provide a negative value to the speed argument. If we want to move the laser down, we provide a positive one. 
+The Update() method is responsible for the movement of the laser objects. The y position is only altered within the gaming arena.
+If we want to move the laser up, we provide a negative value to the speed argument and to move the laser down, we provide a positive one. 
 <br>To destroy every laser object that moves out of the game window, we add a state to the laser objects, i.e. they can be either active or inactive. If it is inactive, it is destroyed using the DeleteInactiveLasers() method in the Game class. The inactive lasers are erased.
 
 
-## **Step 6: Adding the Laser shooting Ability to the Spaceship**
+## **Step 6: Adding the Laser Shooting Ability to the Spaceship**
 
 We create a vector which will contain all the lasers that the spaceship shoots. FireLaser() method is called when the player presses the spacebar key on the keyboard. On calling this method, a laser object will be created and added to the vector of lasers. 
 
@@ -87,12 +87,12 @@ Next, we add delay so that the player cannot shoot a laser before a certain amou
 
 ## **Step 7: Creating the Obstacles**
 
-The obstacles are for the aliens. They act as shields for the spaceship. There are four protective barriers under which the player's spaceship can hide to avoid alien lasers.
-They display damge when hit by the alien's lasers.
+The obstacles are for the aliens. They act as shields for the spaceship. There are 4 protective barriers under which the player's spaceship can hide to avoid alien lasers.
+They display damage when hit by the alien's lasers.
 
-We create a Block class separately. Each object is initialised with it's position in the constructor using Vector2 variable. The Draw() method draws the blue block using DrawRectangle() function.
+We create a Block class separately. Each object is initialised with it's position in the constructor using Vector2 variable. The Draw() method draws a blue block using DrawRectangle() function.
 
-Then we separately create an Obstacle class. The obstacle is representated as collection of blue blocks carefully arranged to give a desired shape. It is anvisible grid consisting of 13 rows and 23 columns, totaling 299 cells. This grid is a vector of vectors. Each cell can be either empty or it can contain a blue block of 3x3 pixels. To make a cell blue, we set its value to 1. If we want an empty cell, we assign it a value of 0.
+Then we separately create an Obstacle class. The obstacle is representated as a collection of blue blocks carefully arranged to give a desired shape. It is an ivisible grid consisting of 13 rows and 23 columns, totaling 299 cells. This grid is a vector of vectors. Each cell can be either empty or it can contain a blue block of 3x3 pixels. To make a cell blue, we set its value to 1. If we want an empty cell, we assign it a value of 0.
 
 ![image](https://github.com/user-attachments/assets/ccb62d17-9fe0-45fa-8f08-b8edd6a6d4a0)
 
@@ -111,7 +111,7 @@ Finally to draw these 4 obstacles, we use a range based for loop in the Draw() m
 
 ## **Step 8: Creating the Aliens**
 
-Our game has 5 rows and 11 columns of aliens. All of the aliens move collectively either to the left or the right, occasionally firing lasers. When they reach the edge of the game window, they change their movement direction and shift slightly downward, progressively increasing the game's challenge.
+Our game has 5 rows and 11 columns of aliens. All of the aliens move collectively either to the left or right, occasionally firing lasers. When they reach the edge of the game window, they shift slightly downward, progressively increasing the game's challenge.
 
 We create an Alien class separately. There are 3 different types pf aliens. So each alien has a type that is used to display a different image for each type. Every alien is given a type and position initialised using the constructor. We load the image of the alien depending on the type. 
 
@@ -125,32 +125,32 @@ Next, we create a vector named aliens in the game class that hold all the aliens
 
 ![image](https://github.com/user-attachments/assets/84835449-b52c-4af5-a523-27cebea2f137)
 
-Next we unload the images when the game window is closed using the UnloadImages() method in the Alien class. We call this method in the Destructor of the Game class.
+Next we unload the images when the game window is closed using the UnloadImages() method in the Alien class. We call this method in the destructor of the Game class.
 
 To move the aliens, we add or remove some pixels from the current position. In the Game class, we create the MoveALiens() and MoveDownAliens() methods. 
-<br>We invoke the Update() method of the alien class and provide it with a direction parameter to move the aliens sideways. The x coordinate is changed.
+<br>We invoke the Update() method of the alien class and provide it with a direction parameter to move the aliens sideways. The x coordinate is changed in MoveAliens() method.
 <br>To move the aliens down, we add some pixels to the y coordinate of the aliens' position. The MoveDownAliens() method is called whenever the aliens hit the end of the screen.
  
 
-## **Step 9: Adding the Laser shooting Ability to the Aliens**
+## **Step 9: Adding the Laser Shooting Ability to the Aliens**
 
-We create a vector to hold all the alien lasers in the Game class. The AlienShootLaser() method selects a random alien and shoots a laser from it. The GetRandomValue() function is used with range 0 to 2 to get a random alien type. Then, we create a laser for that alien and store it in the vector. A positive integer is passes as speed for the laser as it will move downwards.
+We create a vector to hold all the alien lasers in the Game class. The AlienShootLaser() method selects a random alien and shoots a laser from it. The GetRandomValue() function is used with a of range 0 to 2 to get a random alien type. Then, we create a laser for that alien and store it in the vector. A positive integer is passed as speed for the laser as it will move downwards.
 <br>Finally we call the Update() and the Draw() method for the alien lasers in the Game class.
 
-To make the aliens shoot lasers at a slower rate, we use a timer to keep track of when the last laser is fired using GetTime() function and store the time in a variable, i.e. timeLastAlienFired. If the time interval between current time and last fired time exceeds a certain value, a new laser will be fired by the alien. 
+To make the aliens shoot lasers at a slower rate, we use a timer to keep track of when the last laser is fired using GetTime() function and store the time in a variable, i.e. timeLastAlienFired. If the time interval between current time and last fired time exceeds a certain value, a new laser is fired by the alien. 
 <br>The inactive alien lasers are deleted just like the spaceship lasers.
 
 
 ## **Step 10: Creating the Mystery Cat Ship**
 
-The mystery cat ship is another alien ship that appears at the top of the screen from time to time and moves horizontally, either to the left or to the right. Unlike the regular alien ships, this unique alien ship doesn't shoot lasers. However, players have the opportunity to earn extra points by hitting it. 
+The mystery cat ship is another alien ship that appears at the top of the screen from time to time and moves horizontally, either to the left or to the right. Unlike the regular alien ships, this unique alien ship doesn't shoot lasers. However, players have the opportunity to earn extra points by killing it. This mystery ship can be killed using 5 lasers.
 
-We create a Cat class separately. A single object of this class is created and displayed from time to time. Multiple objects are not created. This is implemented using the Spawn() method. In the constructor, we load the image of the cat and set the alive attribute to false. Using the Draw() method we draw the image when the alive attribute is true. To spawn the ship at random intervals of time, we call the Spawn() method in the Game classes's Update() method using the GetTime() and GenerateRandomValue() functions.
-<br>The ship spawns from either side of the screen. So the random starting point is generated using GetRandomValue() function with range 0 to 1. ) represents the left side and 1 represents the right side. 
+We create a Cat class separately. A single object of this class is created and displayed from time to time. Multiple objects are not created. This is implemented using the Spawn() method. In the constructor, we load the image of the cat and set the alive attribute to false. Using the Draw() method we draw the image when the alive attribute is true. To spawn the ship at random intervals of time, we call the Spawn() method in the Game class's Update() method using the GetTime() and GenerateRandomValue() functions.
+<br>The ship can spawn from either side of the screen. So the random starting point is generated using GetRandomValue() function with a range of 0 to 1. 0 represents the left side and 1 represents the right side. 
 
 ![image](https://github.com/user-attachments/assets/b93c79c5-f930-4c6e-95b0-486996435f89)
 
-To move the ship, we use the Update() method. the x coordinate of it's position is added with the speed.
+To move the ship, we use the Update() method. The x coordinate of it's position is added with the speed.
 
 
 ## **Step 11: Checking for Collisions**
@@ -163,16 +163,17 @@ The collision checking is done in the Game class.
 
 Next, we check every laser beam the aliens shoot. If it collides with the spaceship for 3 times, then GameOver! If it collides with the blocks of the obstacles, the blocks are erased. After the lasers collide, their active attribute is set to false.
 
-Finally, we check if the aliens collide with the obstacles or the spaceship or the bottom line of the gaming area. If the aliens collide with the blocks of the obstacles, the respective blocks are erased. If the aliens collide with the spaceship or the bottom line of the gaming arena, then GameOver!
+Finally, we check if the aliens collide with the obstacles or the spaceship or the bottom line of the gaming area. If the aliens collide with the blocks of the obstacles, the respective blocks are erased. If the aliens collide with the spaceship or the bottom line of the gaming arena, then again GameOver!
 
 
 ## **Step 12: Game Over**
 
-This method is called when 3 lives of the spaceship are over or the aliens collide with the spaceship or the bottom line of the gaming arena. We add a new attribute named run. This attribute has value True if the game is running and False if the game is over. So in the GmaeOver() method the run attribute is set to false.
+This method is called when 3 lives of the spaceship are over or the aliens collide with the spaceship or the bottom line of the gaming arena. We add a new attribute named run in the Game class. This attribute has value True if the game is running and False if the game is over. So in the GameOver() method the run attribute is set to false.
 
 
 ## **Step 13: Reset and Initialise the Game again**
 
+These 2 methods of the Game class are called when the player presses the ENTER key of the keybard. 
 All the aliens, the alien lasers and the obstacles are cleared in the Reset() method.
 A Reset() method is added in the Spaceship class where the spaceship object is set to its original position and all it's lasers are cleared. This method is called in the Reset() method of the Game class.
 
@@ -180,7 +181,6 @@ We create InitGame() method to initialise all the variables of the game elements
 
 ![image](https://github.com/user-attachments/assets/894a52cc-1b2b-430d-9858-37bc436efdad)
 
-These 2 methods of the Game class are called when the player presses the ENTER key of the keybard. 
 
 
 ## **Step 14: Adding Score**
