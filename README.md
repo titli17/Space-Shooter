@@ -159,7 +159,7 @@ Raylib provides the CheckCollisionRecs() function, which determines if two recta
 Since all our game elements are not rectangle, getRect() method is used which returns a rectangle object. This rectangle is matched to the dimensions of the object's image and positioned accordingly. The x and y position of the object along with the image width and height are passed as arguments to the getRect() method.
 
 The collision checking is done in the Game class.
-<br>First, we check every laser beam the spaceship shoots. If it collides with any of the 3 aliens, we erase that alien. If 5 lasers hit the cat ship, the alive attribute of the cat is set to false. After the lasers collide, their active attribute is set to false.
+<br>First, we check every laser beam the spaceship shoots. If it collides with any of the 3 aliens, we erase that alien. If 5 lasers hit the cat ship, the alive attribute of the cat is set to false. After the lasers collide, their active attribute is set to false. If all the aliens are hit, we call the CreateAliens() method again.
 
 Next, we check every laser beam the aliens shoot. If it collides with the spaceship for 3 times, then GameOver! If it collides with the blocks of the obstacles, the blocks are erased. After the lasers collide, their active attribute is set to false.
 
@@ -182,9 +182,33 @@ We create InitGame() method to initialise all the variables of the game elements
 ![image](https://github.com/user-attachments/assets/894a52cc-1b2b-430d-9858-37bc436efdad)
 
 
+## **Step 14: Adding Score and High Score**
 
-## **Step 14: Adding Score**
+The next step is to add scoring to the game and display it on the screen. The player gets 100 points when he hits an alien of type 1, 200 points when he hits an alien of type 2, 300 points when he hits an alien of type 3 and 500 points when he hits the mystery cat ship.
 
+We add a score attribute to the Game class and initialize it to 0. We update the score value whenever there is a collision between the spaceship's laser and an alien or mystery cat ship.
+
+Finally in the Shooter Game.cpp file, we display the score text and the score value.
+
+![image](https://github.com/user-attachments/assets/8e411ad2-ca13-45ab-b885-b05d8bd783b9)
+
+Next, we add a highscore attribute to the Game class and initialize this attribute in the InitGame() method. Whenever the score of the player increases, we check if it is a new highscore. If it is, we copy the score value to the highscore value and save it in a text file. For this we create 3 methods in the Game class: checkForHighscore(), saveHighscoreToFile() and loadHighscoreFromFile().
+
+The saveHighscoreToFile() takes an integer as an argument and saves it to a text file.
+
+![image](https://github.com/user-attachments/assets/92a15292-5b24-4be8-837e-eea6be11be1f)
+
+The ofstream line creates an instance of the output file stream class named highscoreFile and associates it with the file named "highscore.txt." This stream is intended for writing data to the file. If the file already exists, its contents will be cleared, and if it doesn't exist, a new file will be created. 
+
+<br>The loadHighscoreFromFile() reads the text file and returns the score it is saved in it.
+
+![image](https://github.com/user-attachments/assets/a957b2fa-b63f-48ac-92ef-3838eaa50d4c)
+
+The ifstream line of code in C++ initializes an input file stream object named highscoreFile to read from the file named "highscore.txt."
+
+Finally in the Shooter Game.cpp file, we display the highscore text and the highscore value and our game is complete.
+
+![image](https://github.com/user-attachments/assets/6f0440f0-ced0-4fb2-95fe-2eeaf6cfa195)
 
 
 
